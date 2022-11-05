@@ -1,0 +1,16 @@
+services:
+  jupyter:
+    build:
+      context: .
+      dockerfile: ./Notebooks/Dockerfile
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./Notebooks:/Notebooks
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
